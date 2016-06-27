@@ -11,7 +11,7 @@ composer require pgrimaud/priceminister-sdk
 
 $client = new Priceminister\PriceministerClient('toto', 'p4ssw0rd');
 
-$productListing = new ProductListing($client);
+$productListing = new Priceminister\ProductListing($client);
 $productListing->setParameter('kw', 'iron man tome 1 croire');
 $result = $productListing->request();
 
@@ -34,10 +34,10 @@ $result = $productListing->request();
 
 //Get price with shipping cost
 echo $result->getBestPrice();
-//Iron Man Tome 1 - Croire : 11.5
+//11.5
 
 //Get price without shipping cost
 echo $result->getBestPrice(false);
-//Iron Man Tome 1 - Croire : 7.5
+//7.5
 
 ```
