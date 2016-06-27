@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+
+
+
+<listingresult xmlns="http://pmcdn.staticpmrk.com/res/schema/listing" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+xsi:schemaLocation="http://pmcdn.staticpmrk.com/res/schema/listing http://pmcdn.staticpmrk.com/res/schema/listing/listing.2015-07-05.xsd">
+<request>
+<version>2015-07-05</version>
+<login>toto</login>
+
+<kw><![CDATA[13123123312]]></kw>
+
+
+
+
+
+<pagenumber>1</pagenumber>
+
+
+<nbproductsperpage>20</nbproductsperpage>
+
+
+</request>
+<response>
+<status>ok</status>
+<lastversion>2015-07-05</lastversion>
+<resultcount>0</resultcount>
+<totalresultcount>0</totalresultcount>
+<navigation>
+
+<selectedcategory><![CDATA[13123123312]]></selectedcategory>
+
+</navigation>
+<products>
+
+</products>
+</response>
+</listingresult>
