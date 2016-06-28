@@ -22,7 +22,17 @@ Array
     [0] => Array
         (
             [id] => 283617873
-            [name] => Iron Man Tome 1 - Croire
+            [values] => Array
+                (
+                    [name] => Iron Man Tome 1 - Croire
+                    [image] => http://pmcdn.priceminister.com/photo/984727643_ML.jpg
+                    [breadcrumb] => Livres > BD et livres d'humour > Comics
+                    [caption] => 
+                    [topic] => Livre
+                    [offers] => 13
+                    [bestprice] => 7
+                )
+
         )
 
 )
