@@ -32,8 +32,9 @@ class ProductListingParserTest extends \PHPUnit_Framework_TestCase
         $productListing->setParameter('kw', 121518297);
         $result = $productListing->request();
 
-        $this->assertEquals('73.49', $result->getBestPrice());
-        $this->assertEquals('69.99', $result->getBestPrice(false));
+        $this->assertEquals(73.49, $result->getBestPrice());
+        $this->assertEquals(69.99, $result->getBestPrice(false));
+        $this->assertEquals(3.50, $result->getShippingCost());
 
         $this->assertEquals('Star Wars X-Wing Rogue Squadron Tome 9 - Dette De Sang', $result->getHeadline());
         $this->assertEquals('121518297', $result->getId());
@@ -47,7 +48,8 @@ class ProductListingParserTest extends \PHPUnit_Framework_TestCase
                 'caption' => 'Steve Crespo',
                 'topic' => 'Livre',
                 'offers' => 1,
-                'bestprice' => 69
+                'bestprice' => 69,
+                'url' => 'http://www.priceminister.com/offer/buy/121518297/star-wars-x-wing-rogue-squadron-tome-9-dette-de-sang-de-steve-crespo-livre.html'
             ]
         ];
 
@@ -139,6 +141,34 @@ class ProductListingParserTest extends \PHPUnit_Framework_TestCase
         $result = $productListing->request();
 
         $this->assertEquals(1, $result->getTotalResultCount());
+    }
+
+    public function testGetAllOffersOfAValidResponse()
+    {
+        $fixtures = file_get_contents(__DIR__ . '/fixtures/listing_ssl_ws_refproduct.xml');
+
+        $response = new Response(200, [], $fixtures);
+        $mock = new MockHandler([$response]);
+
+        $handler = HandlerStack::create($mock);
+        $this->client = new Client(['handler' => $handler]);
+
+        $productListing = new ProductListing($this->priceministerClient, $this->client);
+        $productListing->setParameter('kw', 121518297);
+        $productListing->setParameter('scope', 'PRICING');
+        $result = $productListing->request();
+
+        $offers = [
+            [
+                'price' => 15.5,
+                'shippingcost' => 4.6,
+                'seller' => 'Topslibris',
+                'sellertype' => 'PRO',
+                'quality' => 'NEW'
+            ]
+        ];
+
+        $this->assertEquals($offers, $result->getOffers());
     }
 }
 

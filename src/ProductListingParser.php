@@ -51,6 +51,14 @@ class ProductListingParser
     }
 
     /**
+     * @return float|int
+     */
+    public function getShippingCost()
+    {
+        return (float)$this->data->response->products->product->bestprices->global->shippingcost->amount;
+    }
+
+    /**
      * @return string
      */
     public function getHeadline()
@@ -83,7 +91,8 @@ class ProductListingParser
                         'caption' => (string)$product->caption,
                         'topic' => (string)$product->topic,
                         'offers' => (int)$product->offercounts->total,
-                        'bestprice' => (int)$product->bestprices->global->advertprice->amount
+                        'bestprice' => $this->getAdvertPrice($product),
+                        'url' => (string)$product->url
                     ]
                 ];
             }
@@ -118,5 +127,44 @@ class ProductListingParser
     public function getPageNumber()
     {
         return (int)$this->data->request->pagenumber;
+    }
+
+    /**
+     * @param $product
+     * @return int
+     */
+    private function getAdvertPrice($product)
+    {
+        return isset($product->bestprices->global->advertprice->amount)
+            ? (int)$product->bestprices->global->advertprice->amount : 0;
+    }
+
+    /**
+     * @return array
+     */
+    public function getOffers()
+    {
+        $offers = [];
+
+        $advertTypes = [
+            'newadverts',
+            'usedadverts'
+        ];
+
+        foreach ($advertTypes as $advertType) {
+            if (count($this->data->response->products->product->adverts->{$advertType}) > 0) {
+                foreach ($this->data->response->products->product->adverts->{$advertType}->advert as $advert) {
+                    $offers[] = [
+                        'price' => (float)$advert->price->amount,
+                        'shippingcost' => (float)$advert->shippingcost->amount,
+                        'seller' => (string)$advert->seller->login,
+                        'sellertype' => (string)$advert->seller->type,
+                        'quality' => (string)$advert->quality
+                    ];
+                }
+            }
+        }
+
+        return $offers;
     }
 }
