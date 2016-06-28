@@ -54,7 +54,8 @@ class ProductListing
             'kw',
             'nav',
             'refs',
-            'productids'
+            'productids',
+            'pagenumber'
         ];
 
         foreach ($this->parameters as $key => $parameter) {

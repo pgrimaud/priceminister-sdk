@@ -40,7 +40,15 @@ class ProductListingParserTest extends \PHPUnit_Framework_TestCase
 
         $products[] = [
             'id' => 121518297,
-            'name' => 'Star Wars X-Wing Rogue Squadron Tome 9 - Dette De Sang'
+            'values' => [
+                'name' => 'Star Wars X-Wing Rogue Squadron Tome 9 - Dette De Sang',
+                'image' => 'http://pmcdn.priceminister.com/photo/895559632_ML.jpg',
+                'breadcrumb' => 'Livres > BD et livres d\'humour > Comics',
+                'caption' => 'Steve Crespo',
+                'topic' => 'Livre',
+                'offers' => 1,
+                'bestprice' => 69
+            ]
         ];
 
         $this->assertEquals($products, $result->getProducts());
@@ -97,6 +105,40 @@ class ProductListingParserTest extends \PHPUnit_Framework_TestCase
         $result = $productListing->request();
 
         $this->assertEquals(0, $result->getBestPrice());
+    }
+
+    public function testGetPageNumberOfAValidResponse()
+    {
+        $fixtures = file_get_contents(__DIR__ . '/fixtures/listing_ssl_ws.xml');
+
+        $response = new Response(200, [], $fixtures);
+        $mock = new MockHandler([$response]);
+
+        $handler = HandlerStack::create($mock);
+        $this->client = new Client(['handler' => $handler]);
+
+        $productListing = new ProductListing($this->priceministerClient, $this->client);
+        $productListing->setParameter('kw', 121518297);
+        $result = $productListing->request();
+
+        $this->assertEquals(1, $result->getPageNumber());
+    }
+
+    public function testNumberOfResultsOfAValidResponse()
+    {
+        $fixtures = file_get_contents(__DIR__ . '/fixtures/listing_ssl_ws.xml');
+
+        $response = new Response(200, [], $fixtures);
+        $mock = new MockHandler([$response]);
+
+        $handler = HandlerStack::create($mock);
+        $this->client = new Client(['handler' => $handler]);
+
+        $productListing = new ProductListing($this->priceministerClient, $this->client);
+        $productListing->setParameter('kw', 121518297);
+        $result = $productListing->request();
+
+        $this->assertEquals(1, $result->getTotalResultCount());
     }
 }
 

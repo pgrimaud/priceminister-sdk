@@ -25,7 +25,7 @@ class ProductListingParser
     private function validateXML()
     {
         $this->data = simplexml_load_string($this->body);
-
+        //show($this->data);
         if ($this->data->response->totalresultcount == 0) {
             throw new \Exception('No products');
         }
@@ -76,10 +76,47 @@ class ProductListingParser
             foreach ($this->data->response->products->product as $product) {
                 $products[] = [
                     'id' => (string)$product->productid,
-                    'name' => (string)$product->headline
+                    'values' => [
+                        'name' => (string)$product->headline,
+                        'image' => (string)$product->image->url,
+                        'breadcrumb' => $this->getBreadCrumb($product->breadcrumbselements),
+                        'caption' => (string)$product->caption,
+                        'topic' => (string)$product->topic,
+                        'offers' => (int)$product->offercounts->total,
+                        'bestprice' => (int)$product->bestprices->global->advertprice->amount
+                    ]
                 ];
             }
         }
         return $products;
+    }
+
+    /**
+     * @return int
+     */
+    public function getTotalResultCount()
+    {
+        return (int)$this->data->response->totalresultcount;
+    }
+
+    /**
+     * @param $product
+     * @return string
+     */
+    private function getBreadCrumb($product)
+    {
+        $return = '';
+        foreach ($product->breadcrumbselement as $breadCrumb) {
+            $return .= (string)$breadCrumb->label . ' > ';
+        }
+        return substr($return, 0, -3);
+    }
+
+    /**
+     * @return int
+     */
+    public function getPageNumber()
+    {
+        return (int)$this->data->request->pagenumber;
     }
 }
