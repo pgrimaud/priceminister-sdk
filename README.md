@@ -9,7 +9,7 @@ composer require pgrimaud/priceminister-sdk
 
 ```php
 
-$client = new Priceminister\PriceministerClient('toto', 'p4ssw0rd');
+$client = new Priceminister\PriceministerClient('yourLogin', 'yourToken');
 
 $productListing = new Priceminister\ProductListing($client);
 $productListing->setParameter('kw', 'iron man tome 1 croire');
