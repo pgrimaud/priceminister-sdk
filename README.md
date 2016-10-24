@@ -1,6 +1,7 @@
 # PriceMinister SDK
 [![Build Status](https://travis-ci.org/pgrimaud/priceminister-sdk.svg?branch=master)](https://travis-ci.org/pgrimaud/priceminister-sdk)
-
+[![Code Climate](https://codeclimate.com/github/pgrimaud/priceminister-sdk/badges/gpa.svg)](https://codeclimate.com/github/pgrimaud/priceminister-sdk)
+[![Test Coverage](https://codeclimate.com/github/pgrimaud/priceminister-sdk/badges/coverage.svg)](https://codeclimate.com/github/pgrimaud/priceminister-sdk/coverage)
 ## Usage
 
 ```
