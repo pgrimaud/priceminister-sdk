@@ -13,6 +13,10 @@ class ProductListingParser
      */
     private $data;
 
+    /**
+     * ProductListingParser constructor.
+     * @param $body
+     */
     public function __construct($body)
     {
         $this->body = $body;
@@ -42,11 +46,8 @@ class ProductListingParser
         if ($this->data->response->products->product->offercounts->total > 0) {
             $price = (float)$this->data->response->products->product->bestprices->global->advertprice->amount;
             $shippingCost = (float)$this->data->response->products->product->bestprices->global->shippingcost->amount;
-            if ($withShippingCost) {
-                $return = round($price + $shippingCost, 2);
-            } else {
-                $return = round($price, 2);
-            }
+            
+            $return = $withShippingCost ? round($price + $shippingCost, 2) : round($price, 2);
         }
 
         return $return;
