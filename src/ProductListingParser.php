@@ -36,18 +36,33 @@ class ProductListingParser
     }
 
     /**
-     * @param bool $withShippingCost
-     * @return float
+     * @return float|int
      */
-    public function getBestPrice($withShippingCost = true)
+    public function getBestPrice()
     {
         $return = 0;
 
         if ($this->data->response->products->product->offercounts->total > 0) {
             $price = (float)$this->data->response->products->product->bestprices->global->advertprice->amount;
             $shippingCost = (float)$this->data->response->products->product->bestprices->global->shippingcost->amount;
-            
-            $return = $withShippingCost ? round($price + $shippingCost, 2) : round($price, 2);
+
+            $return = round($price + $shippingCost, 2);
+        }
+
+        return $return;
+    }
+
+    /**
+     * @return float|int
+     */
+    public function getBestPriceWithoutShippingCost()
+    {
+        $return = 0;
+
+        if ($this->data->response->products->product->offercounts->total > 0) {
+            $price = (float)$this->data->response->products->product->bestprices->global->advertprice->amount;
+
+            $return = round($price, 2);
         }
 
         return $return;

@@ -33,7 +33,7 @@ class ProductListingParserTest extends \PHPUnit_Framework_TestCase
         $result = $productListing->request();
 
         $this->assertEquals(73.49, $result->getBestPrice());
-        $this->assertEquals(69.99, $result->getBestPrice(false));
+        $this->assertEquals(69.99, $result->getBestPriceWithoutShippingCost());
         $this->assertEquals(3.50, $result->getShippingCost());
 
         $this->assertEquals('Star Wars X-Wing Rogue Squadron Tome 9 - Dette De Sang', $result->getHeadline());
