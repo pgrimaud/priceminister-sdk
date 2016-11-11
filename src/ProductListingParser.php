@@ -110,7 +110,8 @@ class ProductListingParser
                         'topic' => (string)$product->topic,
                         'offers' => (int)$product->offercounts->total,
                         'bestprice' => $this->getAdvertPrice($product),
-                        'url' => (string)$product->url
+                        'url' => (string)$product->url,
+                        'barcode' => (string)$product->references->barcode
                     ]
                 ];
             }

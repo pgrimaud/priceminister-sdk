@@ -49,7 +49,8 @@ class ProductListingParserTest extends \PHPUnit_Framework_TestCase
                 'topic' => 'Livre',
                 'offers' => 1,
                 'bestprice' => 69,
-                'url' => 'http://www.priceminister.com/offer/buy/121518297/star-wars-x-wing-rogue-squadron-tome-9-dette-de-sang-de-steve-crespo-livre.html'
+                'url' => 'http://www.priceminister.com/offer/buy/121518297/star-wars-x-wing-rogue-squadron-tome-9-dette-de-sang-de-steve-crespo-livre.html',
+                'barcode' => '9782756025544'
             ]
         ];
 
