@@ -129,10 +129,10 @@ class ProductListingParser
     }
 
     /**
-     * @param \StdClass $product
+     * @param \SimpleXMLElement $product
      * @return string
      */
-    private function getBreadCrumb(\StdClass $product)
+    private function getBreadCrumb(\SimpleXMLElement $product)
     {
         $return = '';
         foreach ($product->breadcrumbselement as $breadCrumb) {
@@ -150,10 +150,10 @@ class ProductListingParser
     }
 
     /**
-     * @param \StdClass $product
+     * @param \SimpleXMLElement $product
      * @return int
      */
-    private function getAdvertPrice(\StdClass $product)
+    private function getAdvertPrice(\SimpleXMLElement $product)
     {
         return isset($product->bestprices->global->advertprice->amount)
             ? (int)$product->bestprices->global->advertprice->amount : 0;
