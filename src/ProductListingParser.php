@@ -16,6 +16,7 @@ class ProductListingParser
     /**
      * ProductListingParser constructor.
      * @param $body
+     * @throws \Exception
      */
     public function __construct($body)
     {
@@ -29,7 +30,7 @@ class ProductListingParser
     private function validateXML()
     {
         $this->data = simplexml_load_string($this->body);
-        //show($this->data);
+
         if ($this->data->response->totalresultcount == 0) {
             throw new \Exception('No products');
         }
@@ -43,7 +44,7 @@ class ProductListingParser
         $return = 0;
 
         if ($this->data->response->products->product->offercounts->total > 0) {
-            $price = (float)$this->data->response->products->product->bestprices->global->advertprice->amount;
+            $price        = (float)$this->data->response->products->product->bestprices->global->advertprice->amount;
             $shippingCost = (float)$this->data->response->products->product->bestprices->global->shippingcost->amount;
 
             $return = round($price + $shippingCost, 2);
@@ -101,17 +102,17 @@ class ProductListingParser
         if (count($this->data->response->products->product) > 0) {
             foreach ($this->data->response->products->product as $product) {
                 $products[] = [
-                    'id' => (string)$product->productid,
+                    'id'     => (string)$product->productid,
                     'values' => [
-                        'name' => (string)$product->headline,
-                        'image' => (string)$product->image->url,
+                        'name'       => (string)$product->headline,
+                        'image'      => (string)$product->image->url,
                         'breadcrumb' => $this->getBreadCrumb($product->breadcrumbselements),
-                        'caption' => (string)$product->caption,
-                        'topic' => (string)$product->topic,
-                        'offers' => (int)$product->offercounts->total,
-                        'bestprice' => $this->getAdvertPrice($product),
-                        'url' => (string)$product->url,
-                        'barcode' => (string)$product->references->barcode
+                        'caption'    => (string)$product->caption,
+                        'topic'      => (string)$product->topic,
+                        'offers'     => (int)$product->offercounts->total,
+                        'bestprice'  => $this->getAdvertPrice($product),
+                        'url'        => (string)$product->url,
+                        'barcode'    => (string)$product->references->barcode
                     ]
                 ];
             }
@@ -128,10 +129,10 @@ class ProductListingParser
     }
 
     /**
-     * @param $product
+     * @param \StdClass $product
      * @return string
      */
-    private function getBreadCrumb($product)
+    private function getBreadCrumb(\StdClass $product)
     {
         $return = '';
         foreach ($product->breadcrumbselement as $breadCrumb) {
@@ -149,10 +150,10 @@ class ProductListingParser
     }
 
     /**
-     * @param $product
+     * @param \StdClass $product
      * @return int
      */
-    private function getAdvertPrice($product)
+    private function getAdvertPrice(\StdClass $product)
     {
         return isset($product->bestprices->global->advertprice->amount)
             ? (int)$product->bestprices->global->advertprice->amount : 0;
@@ -174,11 +175,11 @@ class ProductListingParser
             if (count($this->data->response->products->product->adverts->{$advertType}) > 0) {
                 foreach ($this->data->response->products->product->adverts->{$advertType}->advert as $advert) {
                     $offers[] = [
-                        'price' => (float)$advert->price->amount,
+                        'price'        => (float)$advert->price->amount,
                         'shippingcost' => (float)$advert->shippingcost->amount,
-                        'seller' => (string)$advert->seller->login,
-                        'sellertype' => (string)$advert->seller->type,
-                        'quality' => (string)$advert->quality
+                        'seller'       => (string)$advert->seller->login,
+                        'sellertype'   => (string)$advert->seller->type,
+                        'quality'      => (string)$advert->quality
                     ];
                 }
             }
