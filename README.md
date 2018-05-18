@@ -1,9 +1,8 @@
 # PriceMinister SDK
 [![Build Status](https://travis-ci.org/pgrimaud/priceminister-sdk.svg?branch=master)](https://travis-ci.org/pgrimaud/priceminister-sdk)
 [![Packagist](https://img.shields.io/badge/packagist-install-brightgreen.svg)](https://packagist.org/packages/pgrimaud/priceminister-sdk)
-[![Code Climate](https://codeclimate.com/github/pgrimaud/priceminister-sdk/badges/gpa.svg)](https://codeclimate.com/github/pgrimaud/priceminister-sdk)
-[![Test Coverage](https://codeclimate.com/github/pgrimaud/priceminister-sdk/badges/coverage.svg)](https://codeclimate.com/github/pgrimaud/priceminister-sdk/coverage)
-[![Issue Count](https://codeclimate.com/github/pgrimaud/priceminister-sdk/badges/issue_count.svg)](https://codeclimate.com/github/pgrimaud/priceminister-sdk)
+[![Coverage Status](https://coveralls.io/repos/github/pgrimaud/priceminister-sdk/badge.svg?branch=master)](https://coveralls.io/github/pgrimaud/priceminister-sdk?branch=master)
+
 ## Usage
 
 ```
