@@ -5,7 +5,7 @@ use GuzzleHttp\ClientInterface;
 
 class ProductListingRequest
 {
-    const ENDPOINT = 'https://ws.priceminister.com/listing_ssl_ws?action=listing';
+    const ENDPOINT = 'https://ws.fr.shopping.rakuten.com/listing_ssl_ws?action=listing';
     const VERSION = '2015-07-05';
 
     /**
