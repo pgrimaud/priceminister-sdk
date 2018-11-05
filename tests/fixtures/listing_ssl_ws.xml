@@ -100,17 +100,17 @@ xsi:schemaLocation="http://pmcdn.staticpmrk.com/res/schema/listing http://pmcdn.
 
 <breadcrumbselement>
 <label><![CDATA[Livres]]></label>
-<url><![CDATA[https://ws.priceminister.com/listing_ssl_ws?action=listing&login=toto&nav=Livres&pwd=p4ssw0rd&version=2015-07-05]]></url>
+<url><![CDATA[https://ws.fr.shopping.rakuten.com/listing_ssl_ws?action=listing&login=toto&nav=Livres&pwd=p4ssw0rd&version=2015-07-05]]></url>
 </breadcrumbselement>
 
 <breadcrumbselement>
 <label><![CDATA[BD et livres d'humour]]></label>
-<url><![CDATA[https://ws.priceminister.com/listing_ssl_ws?action=listing&login=toto&nav=Livres_BD-et-humour&pwd=p4ssw0rd&version=2015-07-05]]></url>
+<url><![CDATA[https://ws.fr.shopping.rakuten.com/listing_ssl_ws?action=listing&login=toto&nav=Livres_BD-et-humour&pwd=p4ssw0rd&version=2015-07-05]]></url>
 </breadcrumbselement>
 
 <breadcrumbselement>
 <label><![CDATA[Comics]]></label>
-<url><![CDATA[https://ws.priceminister.com/listing_ssl_ws?action=listing&f7=comics&login=toto&nav=Livres_BD-et-humour&pwd=p4ssw0rd&version=2015-07-05]]></url>
+<url><![CDATA[https://ws.fr.shopping.rakuten.com/listing_ssl_ws?action=listing&f7=comics&login=toto&nav=Livres_BD-et-humour&pwd=p4ssw0rd&version=2015-07-05]]></url>
 </breadcrumbselement>
 
 </breadcrumbselements>
