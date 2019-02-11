@@ -1,4 +1,5 @@
 <?php
+
 namespace Priceminister;
 
 use GuzzleHttp\ClientInterface;
@@ -35,18 +36,15 @@ class ProductListingRequest
 
     /**
      * ProductListingRequest constructor.
-     * @param ClientInterface $client
-     * @param PriceministerClient $priceministerClient
-     * @param $parameters
+     * @param ProductListing $productListing
      */
-    public function __construct(ClientInterface $client, PriceministerClient $priceministerClient, $parameters)
+    public function __construct(ProductListing $productListing)
     {
-        $this->client = $client;
-        $this->priceministerClient = $priceministerClient;
-        $this->parameters = $parameters;
+        $this->client              = $productListing->getClient();
+        $this->priceministerClient = $productListing->getPriceministerClient();
+        $this->parameters          = $productListing->getParameters();
 
         $this->createRessource();
-        $this->getRessource();
     }
 
     private function createRessource()
@@ -61,15 +59,22 @@ class ProductListingRequest
     private function setCredentials()
     {
         return self::ENDPOINT .
-        '&login=' . $this->priceministerClient->getLogin() .
-        '&pwd=' . $this->priceministerClient->getPassword() .
-        '&version=' . self::VERSION;
+            '&login=' . $this->priceministerClient->getLogin() .
+            '&pwd=' . $this->priceministerClient->getPassword() .
+            '&version=' . self::VERSION;
     }
 
-    private function getRessource()
+    /**
+     * @return ProductListingParser
+     * @throws \GuzzleHttp\Exception\GuzzleException
+     * @throws \Exception
+     */
+    public function fetch()
     {
-        $request = $this->client->request('GET', $this->ressource);
-        $this->response = (string) $request->getBody();
+        $request  = $this->client->request('GET', $this->ressource);
+        $response = (string)$request->getBody();
+
+        return new ProductListingParser($response);
     }
 
     /**
@@ -78,5 +83,13 @@ class ProductListingRequest
     public function getResponse()
     {
         return $this->response;
+    }
+
+    /**
+     * @return string
+     */
+    public function getRessource()
+    {
+        return $this->ressource;
     }
 }

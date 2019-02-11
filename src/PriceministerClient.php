@@ -1,4 +1,5 @@
 <?php
+
 namespace Priceminister;
 
 use InvalidArgumentException;
@@ -24,7 +25,7 @@ class PriceministerClient
      */
     public function __construct($login = '', $password = '')
     {
-        $this->login = $login;
+        $this->login    = $login;
         $this->password = $password;
 
         if (empty($this->login) || empty($this->password)) {

@@ -1,4 +1,5 @@
 <?php
+
 namespace Priceminister\Tests;
 
 use GuzzleHttp\Client;
@@ -7,6 +8,7 @@ use GuzzleHttp\HandlerStack;
 use GuzzleHttp\Psr7\Response;
 use Priceminister\PriceministerClient;
 use Priceminister\ProductListing;
+use Priceminister\ProductListingRequest;
 
 class ProductListingTest extends \PHPUnit_Framework_TestCase
 {
@@ -20,25 +22,39 @@ class ProductListingTest extends \PHPUnit_Framework_TestCase
         $fixtures = file_get_contents(__DIR__ . '/fixtures/listing_ssl_ws.xml');
 
         $response = new Response(200, [], $fixtures);
-        $mock = new MockHandler([$response]);
+        $mock     = new MockHandler([$response]);
 
-        $handler = HandlerStack::create($mock);
+        $handler      = HandlerStack::create($mock);
         $this->client = new Client(['handler' => $handler]);
     }
 
+    /**
+     * @throws \GuzzleHttp\Exception\GuzzleException
+     */
     public function testCreateProductListingWithInvalidParameters()
     {
         $this->expectException(\InvalidArgumentException::class);
+
         $productListing = new ProductListing($this->priceministerClient, $this->client);
         $productListing->setParameter('nop', 121518297);
-        $productListing->request();
+        $productListing->validParameters();
+
+        $plRequest = new ProductListingRequest($productListing);
+        $plRequest->fetch();
+
     }
 
+    /**
+     * @throws \GuzzleHttp\Exception\GuzzleException
+     */
     public function testCreateProductListingWithValidParameters()
     {
         $productListing = new ProductListing($this->priceministerClient, $this->client);
         $productListing->setParameter('kw', 121518297);
-        $productListing->request();
+        $productListing->validParameters();
+
+        $plRequest = new ProductListingRequest($productListing);
+        $plRequest->fetch();
     }
 }
 

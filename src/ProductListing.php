@@ -1,4 +1,5 @@
 <?php
+
 namespace Priceminister;
 
 use GuzzleHttp\Client;
@@ -22,7 +23,7 @@ class ProductListing
 
     public function __construct(PriceministerClient $priceministerClient, $client = null)
     {
-        $this->client = $client ?: new Client();
+        $this->client              = $client ?: new Client();
         $this->priceministerClient = $priceministerClient;
     }
 
@@ -33,17 +34,6 @@ class ProductListing
     public function setParameter($field, $parameter)
     {
         $this->parameters[$field] = $parameter;
-    }
-
-    /**
-     * @return ProductListingRequest
-     */
-    public function request()
-    {
-        $this->validParameters();
-        $request = new ProductListingRequest($this->client, $this->priceministerClient, $this->parameters);
-
-        return new ProductListingParser($request->getResponse());
     }
 
     public function validParameters()
@@ -67,5 +57,29 @@ class ProductListing
         if (!$hasAllowedParameters) {
             throw new \InvalidArgumentException('Missing one valid parameter');
         }
+    }
+
+    /**
+     * @return Client
+     */
+    public function getClient()
+    {
+        return $this->client;
+    }
+
+    /**
+     * @return PriceministerClient
+     */
+    public function getPriceministerClient()
+    {
+        return $this->priceministerClient;
+    }
+
+    /**
+     * @return array
+     */
+    public function getParameters()
+    {
+        return $this->parameters;
     }
 }

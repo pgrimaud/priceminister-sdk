@@ -1,4 +1,5 @@
 <?php
+
 namespace Priceminister\Tests;
 
 use InvalidArgumentException;
