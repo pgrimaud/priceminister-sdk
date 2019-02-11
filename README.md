@@ -15,9 +15,11 @@ $client = new Priceminister\PriceministerClient('yourLogin', 'yourToken');
 
 $productListing = new Priceminister\ProductListing($client);
 $productListing->setParameter('kw', 'iron man tome 1 croire');
-$result = $productListing->request();
+$productListing->validParameters();
 
-print_r($result->getProducts());
+$plRequest = new ProductListingRequest($productListing);
+
+print_r($plRequest->fetch());
 /*
 Array
 (
@@ -42,7 +44,10 @@ Array
 
 $productListing2 = new ProductListing($client);
 $productListing2->setParameter('productids', '283617873');
-$result = $productListing->request();
+$productListing->validParameters();
+
+$plRequest = new ProductListingRequest($productListing2);
+$result = $plRequest->fetch();
 
 //Get price with shipping cost
 echo $result->getBestPrice();
