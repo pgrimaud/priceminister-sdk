@@ -44,7 +44,7 @@ Array
 
 $productListing2 = new ProductListing($client);
 $productListing2->setParameter('productids', '283617873');
-$productListing->validParameters();
+$productListing2->validParameters();
 
 $plRequest = new ProductListingRequest($productListing2);
 $result = $plRequest->fetch();
