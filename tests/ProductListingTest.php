@@ -55,6 +55,10 @@ class ProductListingTest extends \PHPUnit_Framework_TestCase
 
         $plRequest = new ProductListingRequest($productListing);
         $plRequest->fetch();
+
+        $ressource = 'https://ws.fr.shopping.rakuten.com/listing_ssl_ws?action=listing&login=toto&pwd=p4ssw0rd&version=2015-07-05&kw=121518297';
+
+        $this->assertEquals($ressource, $plRequest->getRessource());
     }
 }
 

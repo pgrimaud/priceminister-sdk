@@ -30,11 +30,6 @@ class ProductListingRequest
     private $ressource = '';
 
     /**
-     * @var string
-     */
-    private $response = '';
-
-    /**
      * ProductListingRequest constructor.
      * @param ProductListing $productListing
      */
@@ -80,16 +75,9 @@ class ProductListingRequest
     /**
      * @return string
      */
-    public function getResponse()
-    {
-        return $this->response;
-    }
-
-    /**
-     * @return string
-     */
     public function getRessource()
     {
+        print_r($this->ressource);
         return $this->ressource;
     }
 }
